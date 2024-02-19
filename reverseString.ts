@@ -4,16 +4,10 @@
  */
 
 function reverseString(s: string[]): void {
-    let left = '';
-    let right = '';
-
     let i = 0, j = s.length - 1;
 
     while (i < j) {
-        left = s[i];
-        right = s[j];
-        s[i] = right;
-        s[j] = left;
+        [s[i], s[j]] = [s[j], s[i]];
         i++;
         j--;
     }
