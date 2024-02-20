@@ -6,16 +6,16 @@
 
 function numSubarrayProductLessThanK(nums: number[], k: number): number {
     let leftIndex = 0;
-    let curr = nums[leftIndex];
-    let sum = curr < k ? 1 : 0;
+    let currentProduct = nums[leftIndex];
+    let count = currentProduct < k ? 1 : 0;
     
     for (let i = 1; i < nums.length; i++) {
-        curr *= nums[i];
-        while (curr >= k && leftIndex <= i) {
-            curr /= nums[leftIndex];
+        currentProduct *= nums[i];
+        while (currentProduct >= k && leftIndex <= i) {
+            currentProduct /= nums[leftIndex];
             leftIndex++;
         }
-        sum += (i - leftIndex + 1);
+        count += (i - leftIndex + 1);
     }
-    return sum;
+    return count;
 };
