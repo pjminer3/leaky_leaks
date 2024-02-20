@@ -4,21 +4,17 @@
  */
 
 function findMaxAverage(nums: number[], k: number): number {
-    let currentSum: number = 0;
-    let currentMaximumAverage: number;
-
-    for (let i = 0; i < k; i++) {
-        currentSum += nums[i];
-    }
-
-    currentMaximumAverage = currentSum / k;
+    let currentSum = nums.slice(0, k).reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+    let maxSum = currentSum;
 
     for (let left = 1; left <= nums.length - k; left++) {
         currentSum -= nums[left - 1];
         currentSum += nums[left + (k - 1)];
-
-        currentMaximumAverage = currentSum / k > currentMaximumAverage ? currentSum / k : currentMaximumAverage;
+        maxSum = Math.max(maxSum, currentSum);
     }
 
-    return currentMaximumAverage;
+    return maxSum / k;
 }
+
+// Time complexity is O(k + n) = O(n)
+// Space complexity is O(1)
