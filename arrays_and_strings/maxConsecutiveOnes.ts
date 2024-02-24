@@ -3,24 +3,23 @@
  */
 
 function maxConsecutiveOnes(nums: number[], k: number): number {
-    let remainingFlips: number = k;
-    let maxOnes: number = 0;
-    let left: number = 0, right: number = -1;
+    let remainingFlips = k;
+    let left = 0;
+    let right = -1;
 
-    // start with left at 0, right at -1
-    // while right < nums length - 1
     while (right < nums.length - 1) {
-        right++;
-        remainingFlips - 1 + nums[right];
-        
-        if (remainingFlips >= 0) {
-            maxOnes = Math.max(maxOnes, right - left + 1);
-        } else {
-            remainingFlips + 1 - nums[left];
+        right++; 
+        if (nums[right] === 0) {
+            remainingFlips--;
+        }
+
+        if (remainingFlips < 0) {
+            remainingFlips = remainingFlips + 1 - nums[left];
             left++;
         }
-    }
-    
+    } 
 
-    return maxOnes;
-};
+    return right - left + 1;
+}
+
+    
