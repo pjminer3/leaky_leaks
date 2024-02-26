@@ -16,5 +16,28 @@ function getAveragesWithPrefixSum(nums: number[], k: number): number[] {
 
 
 function getAveragesWithSlidingWindow(nums: number[], k: number): number[] {
+    const numsLength = nums.length;
+    const averages = new Array(numsLength).fill(-1);
+    const windowSize = (k * 2) + 1;
+    let windowSum = 0;
+    
+    for (let i = 0; i < windowSize; i++) {
+        windowSum += nums[i];
+    }
 
+    if (k === 0) {
+        return nums;
+    } else if (windowSize > numsLength) {
+        return averages;
+    }
+    
+    averages[k] = Math.floor(windowSum / windowSize);
+
+    for (let right = windowSize; right < numsLength; right++) {
+        windowSum += nums[right];
+        windowSum -= nums[right - windowSize];
+        averages[right - k] = Math.floor(windowSum / windowSize);
+    }
+
+    return averages;
 };
