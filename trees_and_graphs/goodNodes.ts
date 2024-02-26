@@ -7,7 +7,7 @@ function goodNodes(root: TreeNode | null): number {
     if (!root) {
         return 0
     }
-    
+
     let dfs = (node: TreeNode | null, maxSoFar: number) => {
         if (!node) {
             return 0;
