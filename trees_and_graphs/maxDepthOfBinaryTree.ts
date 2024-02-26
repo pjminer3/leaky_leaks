@@ -29,10 +29,43 @@ class TreeNode {
     }
 }
 
-function maxDepth(root: TreeNode | null): number {
+function maxDepthRecursive(root: TreeNode | null): number {
     if (!root) {
         return 0;
     }
 
-    return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
+    return 1 + Math.max(maxDepthRecursive(root.left), maxDepthRecursive(root.right));
 };
+
+function maxDepthIterative(root: TreeNode | null): number {
+    if (!root) {
+        return 0;
+    }
+
+    let maxDepth = 0;
+
+    const stack: [TreeNode, number][] = [[root, 1]];
+
+    let node: TreeNode, ans: number;
+    let currentNode: [TreeNode, number][];
+
+    while (stack.length > 0) {
+        let poppedNode = stack.pop();
+
+        if (!poppedNode) {
+            break;
+        }
+
+        [node, ans] = poppedNode;
+        maxDepth = Math.max(maxDepth, ans);
+
+        if (node.left) {
+            stack.push([node.left, ans + 1]);
+        }
+        if (node.right) {
+            stack.push([node.right, ans + 1]);
+        }
+    }
+
+    return maxDepth;
+}
