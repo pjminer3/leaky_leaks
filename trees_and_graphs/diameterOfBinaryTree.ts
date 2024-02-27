@@ -5,22 +5,5 @@
  */
 
 function diameterOfBinaryTree(root: TreeNode | null): number {
-    let diameter = 0;
-
-    let longestPath = (root: TreeNode | null): number => {
-        if (!root) {
-            return 0;
-        }
-
-        let leftPath = longestPath(root.left);
-        let rightPath = longestPath(root.right);
-
-        diameter = Math.max(diameter, leftPath + rightPath);
-
-        return Math.max(leftPath, rightPath) + 1;
-    }
-
-    longestPath(root);
-
-    return diameter;
+    // do it again
 }
