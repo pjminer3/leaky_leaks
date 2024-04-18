@@ -1,4 +1,4 @@
-function linearizeColumnMajor(matrix: number[][]): number[] {
+function linearizeRowMajor(matrix: number[][]): number[] {
     const solution: number[] = [];
     for (let row of matrix) {
         for (let element of row) {
@@ -8,7 +8,7 @@ function linearizeColumnMajor(matrix: number[][]): number[] {
     return solution;
 };
 
-function linearizeRowMajor(matrix: number[][]): number[] {
+function linearizeColumnMajor(matrix: number[][]): number[] {
     const solution: number[] = [];
 
     for (let i = 0; i < matrix[0].length; i++) {
