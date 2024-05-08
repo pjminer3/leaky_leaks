@@ -33,3 +33,17 @@ function mergeLinkedLists(listOne: ListNode | null, listTwo: ListNode | null) {
 
     return sHead.next;
 }
+
+function mergeLinkedListsRecursive(list1: ListNode | null, list2: ListNode | null): ListNode | null {
+    if (!list1 || !list2) {
+        return list1 || list2;
+    }
+
+    if (list1.val > list2.val) {
+        list2.next = mergeLinkedListsRecursive(list1, list2.next);
+        return list2;
+    } else {
+        list1.next = mergeLinkedListsRecursive(list1.next, list2);
+        return list1;
+    }
+}
