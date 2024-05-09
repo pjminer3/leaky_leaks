@@ -1,48 +1,8 @@
-/*
-Given a linked list with each node representing a digit in an integer,
-add 1 to the number.The head holds the most significant digit and tail holds
-the least significant digit.
-Here is some starting code to implement and print out a linked list in Python.
-
-Harder variations:
-1. Do it both recursively and iteratively.
-
-
-EXAMPLE(S)
-head = 1 -> 2 -> 9 -> None
-head = addOne(head)
-
-Output: 1 -> 3 -> 0 -> None
- 
-
-FUNCTION SIGNATURE
-class Node {
-  constructor(val, next) {
-    this.val = val
-    this.next = next
-  }
-
-  toString() {
-    let curr = this
-    let str = ''
-  
-    while (curr) {
-      str += curr.val
-      curr = curr.next
-    } 
-
-    return str
-  }
-}
-
-function addOne(head) {
-*/
-
 class sListNode {
     public val: number;
     public next: sListNode | null;
 
-    constructor(val, next = null) {
+    constructor(val: number, next: sListNode | null = null) {
       this.val = val
       this.next = next
     }
@@ -107,10 +67,26 @@ function iAddOne(number: sListNode): sListNode | null {
     return solution;
 };
 
-function rAddOne(number: sListNode | null): sListNode | null {
-    if (!number) {
-        return number;
+function rAddOne(number: sListNode ): sListNode {
+    function addOneCarry(number: sListNode | null): number {
+        if (!number) {
+            return 1;
+        }
+
+        let sum = number.val + addOneCarry(number.next);
+        let newVal = sum % 10;
+        let carry = Math.floor(sum / 10);
+
+        number.val = newVal;
+
+        return carry;
     }
 
-    
+    let carry = addOneCarry(number);
+
+    if (carry) {
+        number = new sListNode(1, number);
+    }
+
+    return number
 }
