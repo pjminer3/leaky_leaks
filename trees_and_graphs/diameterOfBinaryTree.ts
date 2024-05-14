@@ -4,6 +4,34 @@
  * The length of a path between two nodes is represented by the number of edges between them.
  */
 
+class TreeNode {
+    val: number
+    left: TreeNode | null
+    right: TreeNode | null
+    constructor(val?: number, left?: TreeNode | null, right?: TreeNode | null) {
+        this.val = (val===undefined ? 0 : val)
+        this.left = (left===undefined ? null : left)
+        this.right = (right===undefined ? null : right)
+    }
+}
+
 function diameterOfBinaryTree(root: TreeNode | null): number {
-    // do it again
+    let maxDiameter = 0;
+
+    function getLongestPath(root: TreeNode | null): number {
+        if (!root) {
+            return 0;
+        }
+
+        let maxLeftLeg = getLongestPath(root.left);
+        let maxRightLeg = getLongestPath(root.right);
+
+        maxDiameter = Math.max(maxDiameter, maxLeftLeg + maxRightLeg);
+
+        return Math.max(maxLeftLeg, maxRightLeg) + 1;
+    }
+
+    getLongestPath(root);
+
+    return maxDiameter;
 }
