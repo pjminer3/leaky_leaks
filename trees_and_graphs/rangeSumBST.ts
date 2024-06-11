@@ -5,10 +5,10 @@ function rangeSumBST(root: TreeNode | null, low: number, high: number): number {
         return sum;
     }
 
-    let queue = [root];
+    let queue: TreeNode[] = [root];
 
     while (queue.length) {
-        let newQueue: (TreeNode | null)[] = [];
+        let newQueue: TreeNode[] = [];
         for (let i = 0; i < queue.length; i++) {
             let node = queue[i];
             if (node.val >= low && node.val <= high) {
@@ -16,8 +16,16 @@ function rangeSumBST(root: TreeNode | null, low: number, high: number): number {
             }
 
             if (node.val > low) {
-                newQueue.push(node.left);
+                if (node.left) newQueue.push(node.left);
+            }
+
+            if (node.val < high) {
+                if (node.right) newQueue.push(node.right);
             }
         }
+
+        queue = newQueue;
     }
+
+    return sum;
 };
